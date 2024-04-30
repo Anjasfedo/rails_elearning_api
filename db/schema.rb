@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_30_022828) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_30_104214) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -41,7 +41,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_022828) do
     t.string "title"
     t.text "description"
     t.string "category"
-    t.date "creation_date"
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,10 +52,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_022828) do
     t.text "content"
     t.integer "order"
     t.integer "duration"
-    t.date "release_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_lessons_on_course_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "lessons", "courses"

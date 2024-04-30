@@ -6,7 +6,6 @@ class CreateLessons < ActiveRecord::Migration[7.1]
       t.text :content
       t.integer :order
       t.integer :duration
-      t.date :release_date
 
       t.timestamps
     end

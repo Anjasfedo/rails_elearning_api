@@ -1,5 +1,13 @@
 class Course < ApplicationRecord
+  # * Relation
   has_many :lessons, dependent: :destroy
+
+  # * Validation
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :category, presence: true
+  validates :status, presence: true,
+                     inclusion: { in: %w[active inactive pending completed draft cancelled suspended], message: '%<value>s is not valid status' }
 
   enum status: {
     active: 'Active',

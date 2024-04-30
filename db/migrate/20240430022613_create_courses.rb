@@ -4,7 +4,6 @@ class CreateCourses < ActiveRecord::Migration[7.1]
       t.string :title
       t.text :description
       t.string :category
-      t.date :creation_date
       t.string :status
 
       t.timestamps

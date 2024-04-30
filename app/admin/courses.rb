@@ -4,7 +4,7 @@ ActiveAdmin.register Course do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :title, :description, :category, :creation_date, :status
+  permit_params :title, :description, :category, :status
   #
   # or
   #
@@ -19,7 +19,6 @@ ActiveAdmin.register Course do
       f.input :title
       f.input :description
       f.input :category
-      f.input :creation_date
       f.input :status, as: :select, collection: Course.statuses.keys
     end
     f.actions
