@@ -1,6 +1,6 @@
 class Course < ApplicationRecord
-  has_one :lesson, dependent: :destroy
-  
+  has_many :lessons, dependent: :destroy
+
   enum status: {
     active: 'Active',
     inactive: 'Inactive',
