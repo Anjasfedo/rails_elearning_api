@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  course: one
+  title: MyString
+  content: MyText
+  order: 1
+  duration: 1
+  release_date: 2024-04-30
+
+two:
+  course: two
+  title: MyString
+  content: MyText
+  order: 1
+  duration: 1
+  release_date: 2024-04-30
