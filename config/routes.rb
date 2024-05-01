@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :quiz_questions
   resources :quizzes
   resources :enrollments
   devise_for :admin_users, ActiveAdmin::Devise.config

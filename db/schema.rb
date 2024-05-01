@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_155100) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_161205) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_155100) do
   create_table "enrollments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "course_id", null: false
-    t.float "progress"
+    t.float "progress", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_enrollments_on_course_id"
@@ -65,6 +65,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_155100) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["course_id"], name: "index_lessons_on_course_id"
+  end
+
+  create_table "quiz_questions", force: :cascade do |t|
+    t.integer "quiz_id", null: false
+    t.text "question_text"
+    t.string "correct_answer"
+    t.string "wrong_answer1"
+    t.string "wrong_answer2"
+    t.string "wrong_answer3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_quiz_questions_on_quiz_id"
   end
 
   create_table "quizzes", force: :cascade do |t|
@@ -89,5 +101,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_155100) do
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "quiz_questions", "quizzes"
   add_foreign_key "quizzes", "lessons"
 end

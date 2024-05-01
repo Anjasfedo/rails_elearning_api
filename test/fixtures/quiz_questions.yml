@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quiz: one
+  question_text: MyText
+  correct_answer: MyString
+  wrong_answer1: MyString
+  wrong_answer2: MyString
+  wrong_answer3: MyString
+
+two:
+  quiz: two
+  question_text: MyText
+  correct_answer: MyString
+  wrong_answer1: MyString
+  wrong_answer2: MyString
+  wrong_answer3: MyString
