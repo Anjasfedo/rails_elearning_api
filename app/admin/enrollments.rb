@@ -1,26 +1,24 @@
-ActiveAdmin.register Lesson do
+ActiveAdmin.register Enrollment do
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :course_id, :title, :content, :duration
+  permit_params :user_id, :course_id
   #
   # or
   #
   # permit_params do
-  #   permitted = [:course_id, :title, :content, :order, :duration, :release_date]
+  #   permitted = [:user_id, :course_id, :progress]
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
 
-  # ! Hide order column
+  # ! Hide percent column
   form do |f|
-    f.inputs 'Lesson Details' do
+    f.inputs 'Enrollment Details' do
+      f.input :user_id, as: :select, collection: User.all.map { |user| [user.username, user.id] }
       f.input :course_id, as: :select, collection: Course.all.map { |course| [course.title, course.id] }
-      f.input :title
-      f.input :content
-      f.input :duration
     end
     f.actions
   end

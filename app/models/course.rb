@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   # * Relation
   has_many :lessons, dependent: :destroy
+  has_many :enrrolments, dependent: :destroy
 
   # * Validation
   validates :title, presence: true
