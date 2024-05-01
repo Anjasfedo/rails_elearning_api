@@ -1,6 +1,7 @@
 class Lesson < ApplicationRecord
   # * Relation
   belongs_to :course
+  has_many :quizzes, dependent: :destroy
 
   # * Callback
   before_create :set_order
@@ -9,6 +10,7 @@ class Lesson < ApplicationRecord
   # * Validation
   # TODO: Create model scaffold to auto validates presence for each column
   # validates :course_id, presence: true, uniqueness: true # ! Only for one to one relationship
+  validates :course_id, presence: true
   validates :title, presence: true
   validates :content, presence: true
   validates :order, presence: false
