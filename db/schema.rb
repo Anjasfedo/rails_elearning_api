@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_30_104214) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_165504) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -37,6 +37,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_104214) do
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
   end
 
+  create_table "assessments", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.string "title"
+    t.text "description"
+    t.text "task"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_assessments_on_course_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -44,6 +54,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_104214) do
     t.string "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "course_id", null: false
+    t.float "progress", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -57,6 +77,48 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_104214) do
     t.index ["course_id"], name: "index_lessons_on_course_id"
   end
 
+  create_table "quiz_questions", force: :cascade do |t|
+    t.integer "quiz_id", null: false
+    t.text "question_text"
+    t.string "correct_answer"
+    t.string "wrong_answer1"
+    t.string "wrong_answer2"
+    t.string "wrong_answer3"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_id"], name: "index_quiz_questions_on_quiz_id"
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.integer "lesson_id", null: false
+    t.string "title"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_quizzes_on_lesson_id"
+  end
+
+  create_table "user_assessments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "assessment_id", null: false
+    t.text "responses"
+    t.boolean "is_accepted", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assessment_id"], name: "index_user_assessments_on_assessment_id"
+    t.index ["user_id"], name: "index_user_assessments_on_user_id"
+  end
+
+  create_table "user_quizzes", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "quiz_question_id", null: false
+    t.boolean "is_correct", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["quiz_question_id"], name: "index_user_quizzes_on_quiz_question_id"
+    t.index ["user_id"], name: "index_user_quizzes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
@@ -67,5 +129,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_30_104214) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assessments", "courses"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "users"
   add_foreign_key "lessons", "courses"
+  add_foreign_key "quiz_questions", "quizzes"
+  add_foreign_key "quizzes", "lessons"
+  add_foreign_key "user_assessments", "assessments"
+  add_foreign_key "user_assessments", "users"
+  add_foreign_key "user_quizzes", "quiz_questions"
+  add_foreign_key "user_quizzes", "users"
 end
