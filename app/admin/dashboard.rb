@@ -2,6 +2,15 @@
 ActiveAdmin.register_page "Dashboard" do
   menu priority: 1, label: proc { I18n.t("active_admin.dashboard") }
 
+  # # Define other menu items with different priorities
+  # menu priority: 2, label: "Courses", url: "/admin/courses"
+  # menu priority: 3, label: "Users", url: "/admin/users"
+  # menu priority: 4, label: "Lesson", url: "/admin/lessons"
+  # menu priority: 5, label: "Enrollment", url: "/admin/enrollments"
+  # menu priority: 6, label: "Quizzes", url: "/admin/quizzes"
+  # menu priority: 7, label: "Quiz Question", url: "/admin/quiz_questions"
+  # menu priority: 8, label: "User Quizzes", url: "/admin/user_quizzes"
+
   content title: proc { I18n.t("active_admin.dashboard") } do
     div class: "blank_slate_container", id: "dashboard_default_message" do
       span class: "blank_slate" do

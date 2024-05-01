@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :enrollments, dependent: :destroy
+  has_many :user_quizzes, dependent: :destroy
   # * Secure the password input into password_digest column crypted
   has_secure_password
 

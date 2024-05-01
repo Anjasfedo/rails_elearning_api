@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
+  
+  resources :user_quizzes
   resources :quiz_questions
   resources :quizzes
   resources :enrollments
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-
   resources :users
   resources :lessons
   resources :courses
+
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
