@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :user_assessments
   resources :assessments
   
   resources :user_quizzes

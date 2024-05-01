@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_165118) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_165504) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -98,6 +98,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_165118) do
     t.index ["lesson_id"], name: "index_quizzes_on_lesson_id"
   end
 
+  create_table "user_assessments", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "assessment_id", null: false
+    t.text "responses"
+    t.boolean "is_accepted", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["assessment_id"], name: "index_user_assessments_on_assessment_id"
+    t.index ["user_id"], name: "index_user_assessments_on_user_id"
+  end
+
   create_table "user_quizzes", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "quiz_question_id", null: false
@@ -124,6 +135,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_165118) do
   add_foreign_key "lessons", "courses"
   add_foreign_key "quiz_questions", "quizzes"
   add_foreign_key "quizzes", "lessons"
+  add_foreign_key "user_assessments", "assessments"
+  add_foreign_key "user_assessments", "users"
   add_foreign_key "user_quizzes", "quiz_questions"
   add_foreign_key "user_quizzes", "users"
 end

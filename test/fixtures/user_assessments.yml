@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  assessment: one
+  responses: MyText
+  is_accepted: false
+
+two:
+  user: two
+  assessment: two
+  responses: MyText
+  is_accepted: false
