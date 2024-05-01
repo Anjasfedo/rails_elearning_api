@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_01_162500) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_01_165118) do
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
     t.text "body"
@@ -35,6 +35,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_162500) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.integer "course_id", null: false
+    t.string "title"
+    t.text "description"
+    t.text "task"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_assessments_on_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -108,6 +118,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_01_162500) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "assessments", "courses"
   add_foreign_key "enrollments", "courses"
   add_foreign_key "enrollments", "users"
   add_foreign_key "lessons", "courses"
